@@ -9,11 +9,12 @@ const session = require('express-session');
 const app = express();
 
 passport.use(new GoogleStrategy({
-  clientID: '537149705088-kce31hdjascb5nc6nom9q5s7sritnuvk.apps.googleusercontent.com',
-  clientSecret: 'fw4CpI5KFcgGSrv8q2ZQQB-r',
-  callbackURL: 'http://localhost:8000/auth/google/callback'
+  clientID: process.env.clientID,
+    clientSecret: process.env.clientSecret,
+    callbackURL: process.env.callbackURL,
 }, (accessToken, refreshToken, profile, done) => {
   done(null, profile);
+  console.log(profile);
 }));
 
 app.use(session({ secret: 'aloha' }));
